@@ -6,6 +6,8 @@ import java.util.UUID;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Consulta {
@@ -17,11 +19,13 @@ public class Consulta {
     @Column(nullable = false)
     private LocalDate data_consulta;
 
-    @Column(nullable = false)
-    private String id_medico;
+    @ManyToOne
+    @JoinColumn(name = "id_medico", nullable = false)
+    private Medico medico;
 
-    @Column(nullable = false)
-    private String id_paciente;
+    @ManyToOne
+    @JoinColumn(name = "id_paciente", nullable = false)
+    private Paciente paciente;
     
     @Column(nullable = false)
     private String status;
@@ -42,18 +46,18 @@ public class Consulta {
         this.data_consulta = data_consulta;
     }
 
-    public String getMedico() {
-        return id_medico;
+    public Medico getMedico() {
+        return medico;
 		}
-    	public void setMedico(String id_medico) {
-        this.id_medico = id_medico;
+    	public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 
-    public String getPaciente() {
-        return id_paciente;
+    public Paciente getPaciente() {
+        return paciente;
 		}
-    	public void setPaciente(String id_paciente) {
-        this.id_paciente = id_paciente;
+    	public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
 	}
     
     public String getStatus() {
