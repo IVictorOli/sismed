@@ -1,15 +1,12 @@
 package com.sismed.api.entities;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Consulta {
@@ -19,56 +16,49 @@ public class Consulta {
     private UUID id;
 
     @Column(nullable = false)
-    private LocalDateTime dataConsulta;
+    private LocalDate dataconsulta;
 
-    @ManyToOne
-    @JoinColumn(name = "id_medico", nullable = false)
-    private Medico medico;
+    @Column(nullable = false)
+    private String id_medico;
 
-    @ManyToOne
-    @JoinColumn(name = "id_paciente", nullable = false)
-    private Paciente paciente;
+    @Column(nullable = false)
+    private String id_paciente;
+    
+    @Column(nullable = false)
+    private String status;
 
-    private String descricao;
-
-    // Getters and Setters
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
+		}
+    	public void setId(UUID id) {
         this.id = id;
     }
 
-    public LocalDateTime getDataConsulta() {
-        return dataConsulta;
+    public LocalDate getDataConsulta() {
+        return dataconsulta;
+		}
+    	public void setDataConsulta(LocalDate dataconsulta) {
+        this.dataconsulta = dataconsulta;
     }
 
-    public void setDataConsulta(LocalDateTime dataConsulta) {
-        this.dataConsulta = dataConsulta;
+    public String getMedico() {
+        return id_medico;
+		}
+    	public void setMedico(String id_medico) {
+        this.id_medico = id_medico;
     }
 
-    public Medico getMedico() {
-        return medico;
-    }
-
-    public void setMedico(Medico medico) {
-        this.medico = medico;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public String getPaciente() {
+        return id_paciente;
+		}
+    	public void setPaciente(String id_paciente) {
+        this.id_paciente = id_paciente;
+	}
+    
+    public String getStatus() {
+        return status;
+		}
+    	public void setStatus(String status) {
+        this.status = status;
     }
 }
