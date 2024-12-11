@@ -24,7 +24,11 @@ public class Paciente {
 
     @Column(nullable = false)
     private LocalDate dataNascimento;
+    
+    @Column(nullable = false)
+    private String contato;
 
+    @Column(nullable = false)
     private String email;
 
     public UUID getId() {
@@ -57,6 +61,14 @@ public class Paciente {
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+    
+    public String getContato() {
+        return contato;
+    }
+
+    public void setContato(String contato) {
+        this.contato = contato;
     }
 
     public String getEmail() {
