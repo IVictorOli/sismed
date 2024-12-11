@@ -41,6 +41,52 @@ Force um Update Mavem Project
     Inicie a scr/main/java/com.sismed.api.SismedApplication.java como um Spring Boot App
     Verifique possíveis logs de erro
 
+ # ####### Uso da Api com Swagger ######## #
+
+
+ 1- Controller Paciente
+ POST Paciente: insira um nome, cpf, data nascimento, contato, email.
+ id sera gerada altomaticamente ao enviar a requisicao
+ 
+ GET Pacientes: gera uma lista de todos os pacientes registrados, lista estara em branco
+ caso nao existam pacientes
+
+ DELETE PacientesID: deleta o paciente inserindo a UUID
+
+ PUT PacientesID: edita os dados de um paciente pela ID
+
+ GET PacientesID: pesquisa os dados do paciente pela UUID
+
+
+ 2- Controller Medico
+ POST Medico: insira um nome, especialidade, crm, email.
+ id sera gerada altomaticamente ao enviar a requisicao
+ 
+ GET Medico: gera uma lista de todos os medicos registrados, lista estara em branco
+ caso nao existam Medicos
+
+ DELETE MedicoID: deleta o Medico inserindo a UUID
+
+ PUT MedicoID: edita os dados de um Medico pela ID
+
+ GET MedicoID: pesquisa os dados do Medico pela UUID
+
+
+ 3- - Controller Consulta
+ POST Consulta: A primeira ID é para Consulta (Nao preencher), insira o a ID do Medico,
+ ID do Paciente, Status da Consulta e Data da Consulta.
+ id sera gerada altomaticamente ao enviar a requisicao
+ 
+ GET Consulta: gera uma lista de todas as Consultas registradas, lista estara em branco
+ caso nao existam Consultas
+
+ DELETE ConsultaID: deleta a Consulta inserindo a UUID
+
+ PUT ConsultaID: edita os dados da Consulta, Para Alterar o Medico/Paciente Basta colocar
+ outra ID ou inserir a anterior para nao mudar,
+ 
+ GET ConsultaID: pesquisa os dados da Consulta pela UUID
+
 
 # ####### Links uteis ######## #
 
