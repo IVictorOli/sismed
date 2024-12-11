@@ -25,8 +25,9 @@ public class MedicoController {
 	@Autowired
 	private MedicoRepository medicoRepository;
 
-    @PostMapping
+	@PostMapping
     public ResponseEntity<Medico> cadastrarMedico(@RequestBody Medico medico) {
+        medico.setId(UUID.randomUUID());
         Medico novoMedico = medicoRepository.save(medico);
         return ResponseEntity.ok(novoMedico);
     }

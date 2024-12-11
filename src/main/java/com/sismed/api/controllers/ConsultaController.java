@@ -27,6 +27,7 @@ public class ConsultaController {
 
 	@PostMapping
 		public ResponseEntity<Consulta> agendarConsulta(@RequestBody Consulta consulta) {
+			consulta.setId(UUID.randomUUID());
 			Consulta novaConsulta = consultaRepository.save(consulta);
 			return ResponseEntity.ok(novaConsulta);
 	}

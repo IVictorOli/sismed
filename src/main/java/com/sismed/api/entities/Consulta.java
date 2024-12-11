@@ -2,21 +2,20 @@ package com.sismed.api.entities;
 
 import java.time.LocalDate;
 import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Consulta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(nullable = false)
     private UUID id;
 
     @Column(nullable = false)
-    private LocalDate dataconsulta;
+    private LocalDate data_consulta;
 
     @Column(nullable = false)
     private String id_medico;
@@ -26,6 +25,8 @@ public class Consulta {
     
     @Column(nullable = false)
     private String status;
+    
+//#############################################################################//
 
     public UUID getId() {
         return id;
@@ -35,10 +36,10 @@ public class Consulta {
     }
 
     public LocalDate getDataConsulta() {
-        return dataconsulta;
+        return data_consulta;
 		}
-    	public void setDataConsulta(LocalDate dataconsulta) {
-        this.dataconsulta = dataconsulta;
+    	public void setDataConsulta(LocalDate data_consulta) {
+        this.data_consulta = data_consulta;
     }
 
     public String getMedico() {
