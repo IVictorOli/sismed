@@ -1,0 +1,11 @@
+G:\DEV\projetos\sismedapi\src\main\java\com\sismed\api\config\SwaggerConfig.java
+G:\DEV\projetos\sismedapi\src\main\java\com\sismed\api\controllers\ConsultaController.java
+G:\DEV\projetos\sismedapi\src\main\java\com\sismed\api\controllers\MedicoController.java
+G:\DEV\projetos\sismedapi\src\main\java\com\sismed\api\controllers\PacienteController.java
+G:\DEV\projetos\sismedapi\src\main\java\com\sismed\api\entities\Consulta.java
+G:\DEV\projetos\sismedapi\src\main\java\com\sismed\api\entities\Medico.java
+G:\DEV\projetos\sismedapi\src\main\java\com\sismed\api\entities\Paciente.java
+G:\DEV\projetos\sismedapi\src\main\java\com\sismed\api\repositories\ConsultaRepository.java
+G:\DEV\projetos\sismedapi\src\main\java\com\sismed\api\repositories\MedicoRepository.java
+G:\DEV\projetos\sismedapi\src\main\java\com\sismed\api\repositories\PacienteRepository.java
+G:\DEV\projetos\sismedapi\src\main\java\com\sismed\api\SismedApplication.java
