@@ -1,5 +1,6 @@
 package com.sismed.api.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sismed.api.entities.Paciente;
@@ -31,11 +33,33 @@ public class PacienteController {
         Paciente novoPaciente = pacienteRepository.save(paciente);
         return ResponseEntity.ok(novoPaciente);
     }
-
-    @GetMapping
-    public List<Paciente> listarPacientes() {
-        return pacienteRepository.findAll();
-    }
+    	
+        @GetMapping
+        public ResponseEntity<List<Paciente>> listarPacientes(
+        		@RequestParam(required = false) String nome,
+        		@RequestParam(required = false) String cpf,
+        		@RequestParam(required = false) LocalDate dataNascimento,
+        		@RequestParam(required = false) String contato,
+        		@RequestParam(required = false) String email
+        		) {
+            List<Paciente> pacientes;
+            if (nome != null) {
+            	pacientes = pacienteRepository.findByNome(nome); }
+  		  else if (cpf != null) {
+  			pacientes = pacienteRepository.findByCpf(cpf); }
+  		  else if (dataNascimento != null) {
+  			pacientes = pacienteRepository.findByDataNascimento(dataNascimento); }
+  		  else if (contato != null) {
+  			pacientes = pacienteRepository.findByContato(contato); }
+  		  else if (email != null) {
+  			pacientes = pacienteRepository.findByEmail(email); }
+  		  else {
+  			pacientes = pacienteRepository.findAll();
+            }
+            
+            return ResponseEntity.ok(pacientes);
+        }
+    	
 
     @GetMapping("/{id}")
     public ResponseEntity<Paciente> buscarPacientePorId(@PathVariable UUID id) {

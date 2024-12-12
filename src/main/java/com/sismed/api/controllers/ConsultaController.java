@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sismed.api.entities.Consulta;
@@ -33,9 +34,14 @@ public class ConsultaController {
 	}
 
 	@GetMapping
-		public List<Consulta> listarConsultas() {
-			return consultaRepository.findAll();
-	}
+	public ResponseEntity<List<Consulta>> listarConsultasPorFiltros(
+            @RequestParam(required = false) UUID IdMedico,
+            @RequestParam(required = false) UUID IdPaciente
+    ) {
+        List<Consulta> consultas = consultaRepository.findByFilters(IdMedico, IdPaciente);
+        return ResponseEntity.ok(consultas);
+    }
+	
 
 	@GetMapping("/{id}")
 		public ResponseEntity<Consulta> buscarConsultaPorId(@PathVariable UUID id) {

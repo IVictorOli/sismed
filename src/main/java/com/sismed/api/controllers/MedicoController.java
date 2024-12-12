@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sismed.api.entities.Medico;
@@ -21,8 +22,8 @@ import com.sismed.api.repositories.MedicoRepository;
 
 @RestController
 @RequestMapping("/medicos")
-public class MedicoController {
-
+public class MedicoController 
+{
 	@Autowired
 	private MedicoRepository medicoRepository;
 
@@ -31,36 +32,48 @@ public class MedicoController {
         medico.setId(UUID.randomUUID());
         Medico novoMedico = medicoRepository.save(medico);
         return ResponseEntity.ok(novoMedico);
-    }
+    	}
 
     @GetMapping
-    public List<Medico> listarMedicos() {
-    	return medicoRepository.findAll();
-    }
+    public ResponseEntity<List<Medico>> listarMedicos(
+    		@RequestParam(required = false) String nome,
+    		@RequestParam(required = false) String especialidade,
+    		@RequestParam(required = false) String crm,
+    		@RequestParam(required = false) String email
+    		) {
+        List<Medico> medicos;
+        		if (email != null) {
+        			medicos = medicoRepository.findByEmail(email); }
+        		  else if (nome != null) {
+        			medicos = medicoRepository.findByNome(nome); }
+        		  else if (especialidade != null) {
+        			medicos = medicoRepository.findByEspecialidade(especialidade); }
+        		  else {
+        			medicos = medicoRepository.findAll();}
+        	return ResponseEntity.ok(medicos);
+ 			}
 
     @GetMapping("/{id}")
     public ResponseEntity<Medico> buscarMedicoPorId(@PathVariable UUID id) {
-        Optional<Medico> medico = medicoRepository.findById(id);
-        return medico.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+    			Optional<Medico> medico = medicoRepository.findById(id);
+    		return medico.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    		}
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Medico> atualizarMedico(@PathVariable UUID id, @RequestBody Medico medico) {
-    	if (!medicoRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
-        }
-
-        medico.setId(id);
+    		if (!medicoRepository.existsById(id)) {
+    		return ResponseEntity.notFound().build();}
+    	medico.setId(id);
         Medico medicoAtualizado = medicoRepository.save(medico);
         return ResponseEntity.ok(medicoAtualizado);
-    }
+    	}
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removerMedico(@PathVariable UUID id) {
     	if (!medicoRepository.existsById(id) || medicoRepository.countConsultasByMedico(id) > 0) {
-    		return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
+    		return ResponseEntity.status(HttpStatus.CONFLICT).build();}
         medicoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
-    }
+    	}
 }
