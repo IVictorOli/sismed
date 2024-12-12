@@ -45,6 +45,7 @@ Force um Update Mavem Project
 
 
  1- Controller Paciente
+ 
  POST Paciente: insira um nome, cpf, data nascimento, contato, email.
  id sera gerada altomaticamente ao enviar a requisicao
  
@@ -59,6 +60,7 @@ Force um Update Mavem Project
 
 
  2- Controller Medico
+ 
  POST Medico: insira um nome, especialidade, crm, email.
  id sera gerada altomaticamente ao enviar a requisicao
  
@@ -73,6 +75,7 @@ Force um Update Mavem Project
 
 
  3- - Controller Consulta
+ 
  POST Consulta: A primeira ID é para Consulta (Nao preencher), insira o a ID do Medico,
  ID do Paciente, Status da Consulta e Data da Consulta.
  id sera gerada altomaticamente ao enviar a requisicao
