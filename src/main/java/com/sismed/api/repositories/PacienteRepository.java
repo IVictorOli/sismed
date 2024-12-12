@@ -1,10 +1,14 @@
 package com.sismed.api.repositories;
 
 import java.util.UUID;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.sismed.api.entities.Paciente;
 
-	public interface PacienteRepository extends JpaRepository<Paciente, UUID> {
+@Repository
+public interface PacienteRepository extends JpaRepository<Paciente, UUID> {
+		@Query("SELECT COUNT(c) FROM Consulta c WHERE c.paciente.id = :pacienteId")
+	    long countConsultasByPaciente(UUID pacienteId);
 	}

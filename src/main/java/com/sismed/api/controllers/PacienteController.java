@@ -55,7 +55,7 @@ public class PacienteController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removerPaciente(@PathVariable UUID id) {
-        if (!pacienteRepository.existsById(id)) {
+        if (!pacienteRepository.existsById(id) || pacienteRepository.countConsultasByPaciente(id) > 0) {
         return ResponseEntity.notFound().build();
         }
         pacienteRepository.deleteById(id);

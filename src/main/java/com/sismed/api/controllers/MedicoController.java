@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,8 +57,8 @@ public class MedicoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> removerMedico(@PathVariable UUID id) {
-        if (!medicoRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+    	if (!medicoRepository.existsById(id) || medicoRepository.countConsultasByMedico(id) > 0) {
+    		return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
         medicoRepository.deleteById(id);
         return ResponseEntity.noContent().build();
